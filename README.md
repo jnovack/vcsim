@@ -1,7 +1,7 @@
 # vcsim
 
 This is a CLEAN, AUTO-BUILD docker container of
-[govmomi/vcsim](https://github.com/vmware/govmomi/tree/master/vcsim).
+[vmware/govmomi/vcsim](https://github.com/vmware/govmomi/tree/master/vcsim).
 
 ```
 vcsim - A vCenter and ESXi API based simulator
@@ -11,18 +11,21 @@ for testing consumers of the API. While the mock framework is written in the
 Go language, it can be used by any language that can talk to the vSphere API.
 ```
 
+An open auto-build shows there is no funny-business from me, and this container
+will remain updated whenever the source repository updates a new tag.
+
 ## Why This Docker Container?
 
-All the other containers, including the most popular vcsim container on
-Dockerhub all have custom entrypoints and custom code.  The benefit of open
-source and open licenses is that anyone can do something, the detriment of
-open source and open licenses is that ANYONE can do something.
+Other containers, including the most popular vcsim container on Dockerhub all
+have custom entrypoints and custom code.  The benefit of open source and open
+licenses is that anyone can do something, the detriment of open source and open
+licenses is that ANYONE can do something.
 
-This leaves containers that are old, outdated, and running garbage custom
+This results in containers that are old, outdated, and running garbage custom
 code by whatever bad practice the maintainer currently utilizes.
 
 I'm a purist, I'm a minimalist, and since **vmware** is not publishing their
-OWN `vmware/vcsim container`, I'm left with
+OWN `vmware/vcsim` container, I'm left with
 [doing it right myself](https://xkcd.com/927/).
 
 *Hey! I see that you added some custom Docker `entrypoint` arguments. I thought
