@@ -1,1 +1,5 @@
-/hooks
+**/.env
+**/.git
+**/.vs
+**/.vscode
+**/bin
