@@ -22,7 +22,7 @@ DOCKER_BUILD_ARGS := \
 	--build-arg APPLICATION=${APPLICATION} \
 	--build-arg BUILD_RFC3339=${BUILD_RFC3339} \
 	--build-arg COMMIT=${COMMIT} \
-	--build-arg DESCRIPTION=${DESCRIPTION} \
+	--build-arg DESCRIPTION="${DESCRIPTION}" \
 	--build-arg VERSION=${VERSION} \
 	--progress auto
 
