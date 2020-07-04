@@ -33,4 +33,5 @@ build:
 	go build -o bin/${APPLICATION} -ldflags $(GO_LDFLAGS)
 
 docker:
+	docker rmi ${APPLICATION}:${BRANCH} || true
 	docker build ${DOCKER_BUILD_ARGS} -t ${APPLICATION}:${BRANCH} .
