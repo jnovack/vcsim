@@ -31,6 +31,9 @@ COPY --from=build /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY --from=build /etc/passwd /etc/passwd
 COPY --from=build /etc/group /etc/group
 
+# Copy over the /tmp directory for golang/os.TmpDir
+COPY --chown=appuser --from=build /tmp /tmp
+
 # Run all commands as non-root
 USER appuser:appuser
 
@@ -43,21 +46,21 @@ ARG VERSION="dirty"
 
 # Labels for the container
 LABEL org.opencontainers.image.ref.name="jnovack/${APPLICATION}" \
-      org.opencontainers.image.created=$BUILD_RFC3339 \
-      org.opencontainers.image.authors="Justin J. Novack <jnovack@gmail.com>" \
-      org.opencontainers.image.documentation="https://github.com/jnovack/${APPLICATION}/README.md" \
-      org.opencontainers.image.description="${DESCRIPTION}" \
-      org.opencontainers.image.licenses="MIT" \
-      org.opencontainers.image.source="https://github.com/jnovack/${APPLICATION}" \
-      org.opencontainers.image.revision=$COMMIT \
-      org.opencontainers.image.version=$VERSION \
-      org.opencontainers.image.url="https://hub.docker.com/r/jnovack/${APPLICATION}/"
+    org.opencontainers.image.created=$BUILD_RFC3339 \
+    org.opencontainers.image.authors="Justin J. Novack <jnovack@gmail.com>" \
+    org.opencontainers.image.documentation="https://github.com/jnovack/${APPLICATION}/README.md" \
+    org.opencontainers.image.description="${DESCRIPTION}" \
+    org.opencontainers.image.licenses="MIT" \
+    org.opencontainers.image.source="https://github.com/jnovack/${APPLICATION}" \
+    org.opencontainers.image.revision=$COMMIT \
+    org.opencontainers.image.version=$VERSION \
+    org.opencontainers.image.url="https://hub.docker.com/r/jnovack/${APPLICATION}/"
 
 # Application runs on local port
-EXPOSE 443
+EXPOSE 8989
 
 # Copy application from build stage
 COPY --from=build /go/bin/${APPLICATION} /app
 
 # Set entrypoint to application with container defaults
-ENTRYPOINT ["/app", "-logtostderr", "-l 0.0.0.0:443"]
+ENTRYPOINT ["/app", "-l", "0.0.0.0:8989"]
